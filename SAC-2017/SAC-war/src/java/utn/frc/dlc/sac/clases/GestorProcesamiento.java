@@ -29,6 +29,7 @@ import java.util.logging.Logger;
  */
 public class GestorProcesamiento {
     private HashMap <String,int[]>  hashCompleto;
+    
 
     public HashMap<String, int[]> getHashCompleto() {
         return hashCompleto;

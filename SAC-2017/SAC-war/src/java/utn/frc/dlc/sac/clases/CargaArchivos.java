@@ -13,6 +13,16 @@ import java.util.HashMap;
 public class CargaArchivos {
     
     private HashMap<String,Palabra> vocabulario;
+    private String origen;
+
+    public CargaArchivos(String origen) {
+        this.origen = origen;
+    }
+    
+    
+    public void procesarArchivos(){
+        
+    }
     
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tpu;
+package utn.frc.dlc.sac.clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,8 +29,10 @@ public class TPU {
         
         GestorProcesamiento g = new GestorProcesamiento();
         //g.procesar("16082-8.txt");
-        InterfazGrafica i = new InterfazGrafica();
-        i.habilitarPantalla(g);
+        
+        //COMENTARIOS NUEVOS
+        //InterfazGrafica i = new InterfazGrafica();
+        //i.habilitarPantalla(g);
     }
     
     private static void baseDatos() throws SQLException{
