@@ -9,7 +9,10 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utn.frc.dlc.sac.clases.CargaArchivos;
+import utn.frc.dlc.sac.clases.TPU;
 //import utn.frc.dlc.sac.db.DBManager;
 
 /**
@@ -18,12 +21,11 @@ import utn.frc.dlc.sac.clases.CargaArchivos;
  */
 public abstract class SAC {
     
-    private String origen="../../../DocumentosTP1/";
+    private String origen="../../../DocumentosTP1";
 
     public SAC() {
         CargaArchivos carga= new CargaArchivos(origen);
         
     }
-    
     
 }

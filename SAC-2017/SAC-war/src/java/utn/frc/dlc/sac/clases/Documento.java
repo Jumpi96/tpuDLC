@@ -5,27 +5,38 @@
  */
 package utn.frc.dlc.sac.clases;
 
+import java.io.File;
+
 /**
  *
  * @author juampilorenzo
  */
 public class Documento {
-    private String nombre;
+    private File archivo;
+    private boolean procesado=false;
+    private int idDocumento;
 
-    public Documento(String nombre) {
-        this.nombre = nombre;
+    public boolean isProcesado() {
+        return procesado;
     }
 
-    public Documento() {
+    public void setProcesado(boolean procesado) {
+        this.procesado = procesado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public File getArchivo() {
+        return archivo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setArchivo(File archivo) {
+        this.archivo = archivo;
     }
+
+    public Documento(File archivo, int idDocumento) {
+        this.archivo = archivo;
+        this.idDocumento=idDocumento;
+    }
+
     
     
 }
