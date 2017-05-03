@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utn.frc.dlc.sac.clases;
+package clases;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

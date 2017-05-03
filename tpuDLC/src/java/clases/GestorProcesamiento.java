@@ -4,7 +4,7 @@
   grabar en la base de datos y actualizar el vocabulario
   sin recurrir a ella.
  */
-package utn.frc.dlc.sac.clases;
+package clases;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

@@ -4,7 +4,7 @@
  no tiene en cuenta 'palabras' alfanuméricas y sí tiene en cuenta palabras
  compuestas (con guión intermedio) que son válidas en el idioma castellano.
  */
-package utn.frc.dlc.sac.clases;
+package clases;
 
 import java.util.NoSuchElementException;
 

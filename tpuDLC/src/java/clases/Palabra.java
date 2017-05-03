@@ -1,4 +1,4 @@
-package utn.frc.dlc.sac.clases;
+package clases;
 
 public class Palabra{
     
