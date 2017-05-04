@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -179,10 +180,16 @@ public class CargaArchivos {
         int id=0;
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:vocabulario");
-            String consulta="INSERT INTO Palabras (palabra) VALUES ("+palabra+")";
-            PreparedStatement st=conn.prepareStatement(consulta);
+            String consulta="INSERT INTO Palabras (palabra) VALUES ('"+palabra+"')";
+            PreparedStatement st=conn.prepareStatement(consulta,Statement.RETURN_GENERATED_KEYS);
             
-            id=st.executeUpdate();
+            st.executeUpdate();
+            
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    id=generatedKeys.getInt(1);
+                }
+            }
             st.close();
             
             //probar si devuelve id, si no agregar codigo
@@ -200,10 +207,17 @@ public class CargaArchivos {
         int id=0;
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:vocabulario");
-            String consulta="INSERT INTO Documentos (nombre) VALUES ("+origen+")";
-            PreparedStatement st=conn.prepareStatement(consulta);
+            String consulta="INSERT INTO Documentos (origen) VALUES ('"+origen+"')";
+            PreparedStatement st=conn.prepareStatement(consulta,Statement.RETURN_GENERATED_KEYS);
             
-            id=st.executeUpdate();
+            st.executeUpdate();
+            
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    id=generatedKeys.getInt(1);
+                }
+            }
+            
             st.close();
             
             //probar si devuelve id, si no agregar codigo

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utn.frc.dlc.sac.clases;
+package clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,7 +32,7 @@ public class TPU {
         //GestorProcesamiento g = new GestorProcesamiento();
         //g.procesar("16082-8.txt");
         
-        String origen="../../../DocumentosTP1";
+        String origen="../../DocumentosTP1";
         CargaArchivos carga= new CargaArchivos(origen);
         carga.procesar();
         
