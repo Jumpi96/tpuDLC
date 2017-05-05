@@ -11,10 +11,51 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css" >
 
+ <style>
+            body
+            {
+                background-color:#6fdeab;                
+                background-position: 50% 300%;
+                background-repeat: no-repeat;
+            }
+            .titulo, .botonArmarVocabulario, .busqueda
+            {
+                
+                font-family: Fjalla One;
+                width: 50%;
+                margin: auto;
+                text-align: center;                                
+            }
+            .titulo
+            {
+                font-size: 40px; 
+                line-height: 10%;
+                color: #6fdeab;
+                text-shadow: 2px 2px green, -2px 2px green, 2px -2px green, -2px -2px green
+            }
+            .boton
+            {
+                border: 2px solid green;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px 32px;
+                font-family: Fjalla One;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+            
+        </style>
+
 
   </head>
   <body>
-    <h1>Busqueda</h1>        
+    <div class="container">
+    <div class="jumbotron">
+     <h1>Buscador</h1>     
+    </div>
         <div class="busqueda">
             <form action="NuevaBusqueda" method="get">
                 <h2>Su búsqueda: <input type="text" name="txt_busqueda" id="txt_busqueda"></h2>
