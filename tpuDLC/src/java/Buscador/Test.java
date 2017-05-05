@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package Buscador;
 
+import Indexacion.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,30 +16,21 @@ import java.util.logging.Logger;
  *
  * @author juamp
  */
-public class TPU {
+public class Test {
 
     /**
      * @param args the command line arguments
      */
-    String origen="../../../DocumentosTP1";
     
     public static void main(String[] args) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TPU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        //GestorProcesamiento g = new GestorProcesamiento();
-        //g.procesar("16082-8.txt");
-        
-        String origen="../../DocumentosTP1";
-        CargaArchivos carga= new CargaArchivos(origen);
-        carga.procesar();
-        
-        //COMENTARIOS NUEVOS
-        //InterfazGrafica i = new InterfazGrafica();
-        //i.habilitarPantalla(g);
+               
+        Buscador b = new Buscador();
+        System.out.println("Cargado");
     }
     
     private static void baseDatos() throws SQLException{

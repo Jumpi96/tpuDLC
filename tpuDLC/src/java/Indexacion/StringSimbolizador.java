@@ -4,7 +4,7 @@
  no tiene en cuenta 'palabras' alfanuméricas y sí tiene en cuenta palabras
  compuestas (con guión intermedio) que son válidas en el idioma castellano.
  */
-package clases;
+package Indexacion;
 
 import java.util.NoSuchElementException;
 
@@ -17,7 +17,7 @@ public class StringSimbolizador {
     private int newPosition;
     private int maxPosition;
     private String str;
-    private final String delimiters=" /,.;?¿¡!\"'*(){}_[]«:»";
+    private final String delimiters=" /,.;?¿¡!\"'`*(){}_[]«:»";
     private final String noIntermedios="0123456789"; 
     private int contadorGuiones;
     private boolean noEsPalabra;

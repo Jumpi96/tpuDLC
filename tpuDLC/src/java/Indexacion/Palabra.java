@@ -1,4 +1,4 @@
-package clases;
+package Indexacion;
 
 public class Palabra{
     
@@ -10,6 +10,13 @@ public class Palabra{
     public Palabra(String palabra,int idPalabra) {
         this.palabra = palabra;
         this.idPalabra=idPalabra;
+    }
+    
+    public Palabra(String palabra, int idPalabra, int nr, int maxTF) {
+        this.palabra = palabra;
+        this.idPalabra = idPalabra;
+        this.nr = nr;
+        this.maxTF = maxTF;
     }
 
     public int getIdPalabra() {
