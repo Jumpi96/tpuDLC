@@ -5,8 +5,6 @@
  */
 package Servlet;
 
-import Indexacion.GestorProcesamiento;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

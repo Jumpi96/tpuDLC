@@ -116,7 +116,7 @@ public class CargaArchivos {
         } 
         catch (NullPointerException ex) {} 
         catch (IOException ex) {
-            Logger.getLogger(GestorProcesamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CargaArchivos.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (Exception ex) {}
         return hash;
@@ -171,7 +171,7 @@ public class CargaArchivos {
             st.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorProcesamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CargaArchivos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -198,7 +198,7 @@ public class CargaArchivos {
             
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorProcesamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CargaArchivos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Palabra(palabra,id);
     }
@@ -226,7 +226,7 @@ public class CargaArchivos {
             
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorProcesamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CargaArchivos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Documento(new File(origen),id);
     }

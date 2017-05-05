@@ -1,6 +1,8 @@
 package Indexacion;
 
-public class Palabra{
+import java.util.Comparator;
+
+public class Palabra implements Comparable<Palabra>{
     
     private String palabra;
     private int idPalabra;
@@ -38,5 +40,28 @@ public class Palabra{
 
     public Palabra() {
     }
+
+    public int getNr() {
+        return nr;
+    }
+
+    @Override
+    public int compareTo(Palabra o) {
+        if (this.nr>o.getNr()) return 1;
+                else if (this.nr<o.getNr()) return -1;
+                        else return 0;
+    }
     
+    public static Comparator<Palabra> PalabraComparator
+                          = new Comparator<Palabra>() {
+
+        public int compare(Palabra palabra1, Palabra palabra2) {
+
+          return palabra1.compareTo(palabra2);
+
+        }
+
+    };
 }
+
+

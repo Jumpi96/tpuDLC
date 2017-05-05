@@ -47,4 +47,10 @@ public class AparicionPalabra {
     public void contar(){
         this.contador++;
     }
+
+    public AparicionPalabra(Palabra palabra, Documento documento, int contador) {
+        this.palabra = palabra;
+        this.contador = contador;
+        this.documento = documento;
+    }
 }

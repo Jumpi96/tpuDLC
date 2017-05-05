@@ -15,6 +15,7 @@ public class Documento {
     private File archivo;
     private boolean procesado=false;
     private int idDocumento;
+    private int contador;
 
     public int getIdDocumento() {
         return idDocumento;
@@ -43,8 +44,11 @@ public class Documento {
     public Documento(File archivo, int idDocumento) {
         this.archivo = archivo;
         this.idDocumento=idDocumento;
+        this.contador=0;
     }
 
-    
+    public void contar(){
+        contador++;
+    }
     
 }

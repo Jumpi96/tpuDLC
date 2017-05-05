@@ -1,0 +1,12 @@
+Para obtener nr:
+UPDATE Palabras SET nr=(SELECT COUNT(*) FROM PalabrasXDocumento WHERE PalabrasXDocumento.idPalabra=Palabras.ROWID GROUP BY PalabrasXDocumento.idPalabra) WHERE EXISTS (SELECT * FROM PalabrasXDocumento WHERE PalabrasXDocumento.idPalabra=Palabras.ROWID);
+
+Para obtener maxTF:
+UPDATE Palabras SET maxTF=(SELECT MAX(contador) FROM PalabrasXDocumento WHERE PalabrasXDocumento.idPalabra=Palabras.ROWID GROUP BY PalabrasXDocumento.idPalabra) WHERE EXISTS (SELECT * FROM PalabrasXDocumento WHERE PalabrasXDocumento.idPalabra=Palabras.ROWID);
+
+Para pegar ROWID en idPalabra:
+UPDATE Palabras SET IdPalabra=ROWID;
+
+Para pegar ROWID en idDocumento:
+UPDATE Documentos SET idDocumento=ROWID;
+
