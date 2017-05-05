@@ -48,7 +48,7 @@ public class Buscador {
         
         HashMap<String,Documento> respuestas=new HashMap<String,Documento>();
         List<Palabra> palabras = new ArrayList<Palabra>();
-        List<Documento> docs= new ArrayList<Documento>();
+        List<Documento> docs;
         String cont;
         
         StringSimbolizador st=new StringSimbolizador(busqueda);
@@ -76,13 +76,14 @@ public class Buscador {
                 }
             }
         }
-        /*
-        PASAR HASHMAP A UNA ESTRUCTURA QUE PERMITA ORDENAR Y LUEGO SELECCIONAR
-        SOLO 30 PARA DEVOLVER
-        */
-        while(docs.size()<30){
-            
-        }
+
+        docs=new ArrayList(respuestas.values());
+        docs.sort(Documento.DocumentoComparator);
+        
+        if (docs.size()>30){
+            docs=docs.subList(0, R);
+    }
+        
         
         return docs;
     }
