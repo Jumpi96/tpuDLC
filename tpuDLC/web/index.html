@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BuscaDOC</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" >
+
+
+  </head>
+  <body>
+    <h1>Busqueda</h1>        
+        <div class="busqueda">
+            <form action="NuevaBusqueda" method="get">
+                <h2>Su búsqueda: <input type="text" name="txt_busqueda" id="txt_busqueda"></h2>
+                <input type="submit" name="btn_buscar" value="Buscar" class="boton">
+            </form>
+        </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js">      
+  </body>
 </html>
