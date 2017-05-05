@@ -74,7 +74,7 @@
                 font-size: 16px;
             }
         </style>           
-        <title></title>
+        <title>Resultado</title>
     </head>
     <body>
         <div class="titulo">
