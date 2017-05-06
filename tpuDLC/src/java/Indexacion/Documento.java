@@ -5,7 +5,13 @@
  */
 package Indexacion;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Comparator;
 
 /**
@@ -36,6 +42,13 @@ public class Documento implements Comparable<Documento> {
 
     public int getContador() {
         return contador;
+    }
+    
+    public String getTitulo() throws FileNotFoundException, IOException{
+        Charset inputCharset = Charset.forName("ISO-8859-1");
+        return new BufferedReader(new InputStreamReader(
+                new FileInputStream(archivo.getPath()),
+                    inputCharset)).readLine();
     }
 
     public File getArchivo() {

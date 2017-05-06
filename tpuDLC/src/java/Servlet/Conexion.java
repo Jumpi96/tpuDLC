@@ -5,7 +5,12 @@
  */
 package Servlet;
 
+import Buscador.Buscador;
+import Indexacion.AparicionPalabra;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +34,7 @@ public class Conexion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    GestorProcesamiento g;
+    Buscador b;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -63,7 +68,23 @@ public class Conexion extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        //ACA COMPLETAR ACA HACE LA BUSQUEDA TENER EN CUENTA REFERENCIA 1
+        String busqueda = request.getParameter("campoBusqueda");
+        List<AparicionPalabra> respuestaBuscador;
+        
+        b = new Buscador();
+        respuestaBuscador=b.buscar(busqueda);
+        
+        String[][] respuesta = new String[respuestaBuscador.size()][2];
+        
+        for (int i = 0; i < respuestaBuscador.size(); i++) {
+            respuesta[i][0]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            respuesta[i][1]=respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
+        }
+        
+        request.setAttribute("resultados", respuesta);
+        request.setAttribute("consulta",busqueda);
+        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
     }
 
     /**
