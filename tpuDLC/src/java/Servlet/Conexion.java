@@ -38,6 +38,23 @@ public class Conexion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String busqueda = request.getParameter("campoBusqueda");
+        List<AparicionPalabra> respuestaBuscador;
+        
+        b = new Buscador();
+        respuestaBuscador=b.buscar(busqueda);
+        
+        String[][] respuesta = new String[respuestaBuscador.size()][2];
+        
+        for (int i = 0; i < respuestaBuscador.size(); i++) {
+            respuesta[i][0]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            respuesta[i][1]=respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
+        }
+        
+        request.setAttribute("resultados", respuesta);
+        request.setAttribute("consulta",busqueda);
+        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,25 +83,8 @@ public class Conexion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response);        
         
-        String busqueda = request.getParameter("campoBusqueda");
-        List<AparicionPalabra> respuestaBuscador;
-        
-        b = new Buscador();
-        respuestaBuscador=b.buscar(busqueda);
-        
-        String[][] respuesta = new String[respuestaBuscador.size()][2];
-        
-        for (int i = 0; i < respuestaBuscador.size(); i++) {
-            respuesta[i][0]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            respuesta[i][1]=respuestaBuscador.get(i).getDocumento()
-                    .getArchivo().getPath();
-        }
-        
-        request.setAttribute("resultados", respuesta);
-        request.setAttribute("consulta",busqueda);
-        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
     }
 
     /**
