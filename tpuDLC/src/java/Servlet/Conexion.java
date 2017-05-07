@@ -37,7 +37,29 @@ public class Conexion extends HttpServlet {
     Buscador b;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");        
+
+        String busqueda = request.getParameter("campoBusqueda");
+        List<AparicionPalabra> respuestaBuscador;
+        
+        b = new Buscador();
+        respuestaBuscador=b.buscar(busqueda);
+        
+        String[] titulos = new String[respuestaBuscador.size()];
+        String[] origenes = new String[respuestaBuscador.size()];
+        
+        for (int i = 0; i < respuestaBuscador.size(); i++) {
+            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            origenes[i]=respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
+        }
+        
+        
+        request.setAttribute("titulos", titulos);
+        request.setAttribute("origenes", origenes);
+        request.setAttribute("consulta",busqueda);
+        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+
 //        String busqueda = request.getParameter("campoBusqueda");
 //        List<AparicionPalabra> respuestaBuscador;
 //        
@@ -55,6 +77,7 @@ public class Conexion extends HttpServlet {
 //        request.setAttribute("resultados", respuesta);
 //        request.setAttribute("consulta",busqueda);
 //        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+
  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,27 +107,27 @@ public class Conexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);       
-        
-
-        String busqueda = request.getParameter("campoBusqueda");
-        List<AparicionPalabra> respuestaBuscador;
-        
-        b = new Buscador();
-        respuestaBuscador=b.buscar(busqueda);
-        
-        String[] titulos = new String[respuestaBuscador.size()];
-        String[] origenes = new String[respuestaBuscador.size()];
-        
-        for (int i = 0; i < respuestaBuscador.size(); i++) {
-            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            origenes[i]=respuestaBuscador.get(i).getDocumento()
-                    .getArchivo().getPath();
-        }
-        
-        request.setAttribute("titulos", titulos);
-        request.setAttribute("origenes", origenes);
-        request.setAttribute("consulta",busqueda);
-        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+//        
+//
+//        String busqueda = request.getParameter("campoBusqueda");
+//        List<AparicionPalabra> respuestaBuscador;
+//        
+//        b = new Buscador();
+//        respuestaBuscador=b.buscar(busqueda);
+//        
+//        String[] titulos = new String[respuestaBuscador.size()];
+//        String[] origenes = new String[respuestaBuscador.size()];
+//        
+//        for (int i = 0; i < respuestaBuscador.size(); i++) {
+//            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+//            origenes[i]=respuestaBuscador.get(i).getDocumento()
+//                    .getArchivo().getPath();
+//        }
+//        
+//        request.setAttribute("titulos", titulos);
+//        request.setAttribute("origenes", origenes);
+//        request.setAttribute("consulta",busqueda);
+//        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
 
     }
 

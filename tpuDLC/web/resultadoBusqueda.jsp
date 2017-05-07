@@ -1,93 +1,94 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-
+<html>
     <head>
-        <meta name="viewport" http-equiv="Content-Type" content="text/html, charset=UTF-8, width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="spinner.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-        <script src="app.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Resultado</title>
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet"> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <title>Bookipedia - Resultados</title>
+        <script>
+            $(document).ready(function()
+            {
+                $("#pagina1-2").click(function()
+                {
+                    $(".listado").hide();
+                    $("#pagina2").show();
+                });
+                $("#pagina2-1").click(function()
+                {
+                    $(".listado").hide();
+                    $("#pagina1").show();
+                });
+                $("#pagina2-3").click(function()
+                {
+                    $(".listado").hide();
+                    $("#pagina3").show();
+                });
+                $("#pagina3-2").click(function()
+                {
+                    $(".listado").hide();
+                    $("#pagina2").show();
+                });
+            });
+        </script>
+        <style>
+            body
+            {
+                background-color:#d7fac4;
+            }
+            .titulo, .listado, .subtitulo, .volver
+            {
+                font-family: Fjalla One;
+                width: 50%;
+                margin: auto;
+                text-align: center;                                
+            }
+            .listado
+            {
+                display: none;
+            }
+            .titulo
+            {
+                font-size: 30px; 
+                line-height: 100%;
+                color: #6fdeab;
+                text-shadow: 1.5px 1.5px green, -1.5px 1.5px green, 1.5px -1.5px green, -1.5px -1.5px green;
+            }
+            .subtitulo
+            {
+                font-size: 20px; 
+                line-height: 20%;
+            }
+            .boton
+            {
+                border: 2px solid green;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                background-color: #4CAF50;
+                color: white;
+                padding: 15px 32px;
+                font-family: Fjalla One;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+        </style>           
+        
     </head>
-    <body class="w3-light-grey">
-        <div class="w3-container w3-center">
-            <div class="w3-container w3-center w3-hide-small">
-                <a href="index.html" target="_self"><img src="Bookipedia.png" class="w3-padding w3-image" alt="logo2" style="max-width: 25%; max-height: 25%"/></a>
+    <body>
+        
+            <h1>Documentos relacionados</h1>
+        </div>      
+            <br> 
+            <div>           
+            <ol>                
+                <c:forEach items="${origenes}" var="d" begin="0" end="19" varStatus="i">                     
+                    <li value="${i.index + 1}">Documento: <c:out value="${d.getTitulo()}"></c:out></li>
+                    <br>                    
+                </c:forEach>
+            </ol>            
             </div>
-            <div class="w3-container w3-center w3-hide-large w3-hide-medium">
-                <h4><a href="index.html" target="_self">Resultados</a></h4>
-            </div>
-                <div id="formHolder" style="margin-left: 0%; margin-right: 0%">
-                <!-- Este form le hace un request por POST a servletPrueba-->
-                <form action="Conexion" method="POST" onsubmit="showSpinner()">
-                    <input class="w3-input" type="text" placeholder="Ingrese aquí su búsqueda..." name="campoBusqueda" autofocus required>
-                    <!--<input class="w3-button w3-hover-blue-grey w3-block w3-xlarge" type="submit" value="Buscar">-->
-                </form>
-           </div>
-        </div>
-
-        <% String s[] = (String [])request.getAttribute("titulos");%>
-        <% String t[] = (String [])request.getAttribute("origenes");%>
-        <% String foo = " arrojó los siguientes resultados:";%>
-        <% String margen = "2%";%>
-        <% // De este modo muestro un mensaje más acorde cuando no hay ningún resultado%>
-        <% if (s.length == 0) { foo = " no produjo ningún resultado :("; margen = "15%";}%>
-
-        <h4 id="busqueda" class="w3-center" style="margin:<%=margen%>">La búsqueda de <b><%=request.getAttribute("textoConsulta")%></b><%=foo%></h4><br>
-            <div id="resultadosHolder" class="w3-full">
-                <div class="w3-container">
-                    <div class="w3-half">
-                        <ul class="w3-ul w3-hoverable">
-                            <!--Imprimo los impares-->
-                        <% for (int i = 0; i < s.length; i+=2) { %>
-                            <% if (s[i] != null) {%>
-                            <% String nombre = s[i].substring(0, s[i].length()-4);%>
-                            <% String preview = t[i];%>
-                            <%String ruta = "libros/" + s[i];%>
-                            
-                            
-                            <li id="<%=nombre%>" onmouseover="showPreview('<%=nombre%>','<%=preview%>')" onmouseout="hidePreview('<%=nombre%>')">
-                                <i class="fa fa-book">&nbsp;</i><a href="<%=ruta%>" target="_blank"><b><%=nombre%></b></a>
-                                <a href=<%=ruta%> download="<%=ruta%>" target="_blank"><i class="fa fa-download w3-right"></i></a>
-                            </li>
-                            <%}%>
-                        <%}%>
-                        </ul>
-                    </div>
-                    <div class="w3-half">
-                        <ul class="w3-ul w3-hoverable">
-                            <!--Imprimo los impares-->
-                        <% for (int i = 1; i < s.length; i+=2) { %>
-                            <% if (s[i] != null) {%>
-                            <!-- Hago esto para no tener problema con los nombres, que tienen un punto entre medio-->
-                            <% String nombre = s[i].substring(0, s[i].length()-4);%>
-                            <% String preview = t[i];%>
-                            <%String ruta = "libros/" + s[i];%>
-                            <li id="<%=nombre%>" onmouseover="showPreview('<%=nombre%>','<%=preview%>')" onmouseout="hidePreview('<%=nombre%>')">
-                                <i class="fa fa-book">&nbsp;</i><a href="<%=ruta%>" target="_blank"><b><%=nombre%></b></a>
-                                <a href=<%=ruta%> download="<%=ruta%>" target="_blank"><i class="fa fa-download w3-right"></i></a>
-                            </li>
-                            <%}%>
-                        <%}%>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                <div id="spinnerHolder" class="sk-cube-grid" style="display:none">
-                    <div class="sk-cube sk-cube1"></div>
-                    <div class="sk-cube sk-cube2"></div>
-                    <div class="sk-cube sk-cube3"></div>
-                    <div class="sk-cube sk-cube4"></div>
-                    <div class="sk-cube sk-cube5"></div>
-                    <div class="sk-cube sk-cube6"></div>
-                    <div class="sk-cube sk-cube7"></div>
-                    <div class="sk-cube sk-cube8"></div>
-                    <div class="sk-cube sk-cube9"></div>
-                </div>                                  
+        
     </body>
 </html>
