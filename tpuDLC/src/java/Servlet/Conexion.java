@@ -74,15 +74,17 @@ public class Conexion extends HttpServlet {
         b = new Buscador();
         respuestaBuscador=b.buscar(busqueda);
         
-        String[][] respuesta = new String[respuestaBuscador.size()][2];
+        String[] titulos = new String[respuestaBuscador.size()];
+        String[] origenes = new String[respuestaBuscador.size()];
         
         for (int i = 0; i < respuestaBuscador.size(); i++) {
-            respuesta[i][0]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            respuesta[i][1]=respuestaBuscador.get(i).getDocumento()
+            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            origenes[i]=respuestaBuscador.get(i).getDocumento()
                     .getArchivo().getPath();
         }
         
-        request.setAttribute("resultados", respuesta);
+        request.setAttribute("titulos", titulos);
+        request.setAttribute("origenes", origenes);
         request.setAttribute("consulta",busqueda);
         request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
     }
