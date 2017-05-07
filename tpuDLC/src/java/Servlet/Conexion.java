@@ -85,6 +85,28 @@ public class Conexion extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);        
         
+<<<<<<< HEAD
+=======
+        String busqueda = request.getParameter("campoBusqueda");
+        List<AparicionPalabra> respuestaBuscador;
+        
+        b = new Buscador();
+        respuestaBuscador=b.buscar(busqueda);
+        
+        String[] titulos = new String[respuestaBuscador.size()];
+        String[] origenes = new String[respuestaBuscador.size()];
+        
+        for (int i = 0; i < respuestaBuscador.size(); i++) {
+            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            origenes[i]=respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
+        }
+        
+        request.setAttribute("titulos", titulos);
+        request.setAttribute("origenes", origenes);
+        request.setAttribute("consulta",busqueda);
+        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+>>>>>>> origin/master
     }
 
     /**
