@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  *
@@ -45,10 +46,13 @@ public class Documento implements Comparable<Documento> {
     }
     
     public String getTitulo() throws FileNotFoundException, IOException{
-        Charset inputCharset = Charset.forName("ISO-8859-1");
-        return new BufferedReader(new InputStreamReader(
-                new FileInputStream(archivo.getPath()),
-                    inputCharset)).readLine();
+        
+        FileInputStream fis=new FileInputStream(archivo);
+        /*Scanner scanner=new Scanner(fis);
+        String linea=scanner.nextLine();
+        return linea;
+        */
+        return archivo.getPath();
     }
 
     public File getArchivo() {

@@ -6,7 +6,7 @@
 package Servlet;
 
 import Buscador.Buscador;
-import Indexacion.AparicionPalabra;
+import Indexacion.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,10 +42,15 @@ public class Conexion extends HttpServlet {
     Buscador b;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.setContentType("text/html;charset=UTF-8");        
 
         String busqueda = request.getParameter("campoBusqueda");
-        List<AparicionPalabra> respuestaBuscador;
+        List<Documento> respuestaBuscador;
         String origen=cargarOrigen();
         
         b = new Buscador();
@@ -53,9 +60,8 @@ public class Conexion extends HttpServlet {
         String[] origenes = new String[respuestaBuscador.size()];
         
         for (int i = 0; i < respuestaBuscador.size(); i++) {
-            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
-                    .getArchivo().getPath();
+            titulos[i]=respuestaBuscador.get(i).getTitulo();
+            origenes[i]=origen+respuestaBuscador.get(i).getArchivo().getAbsolutePath();
         }
         
         request.setAttribute("titulos", titulos);

@@ -10,6 +10,9 @@ import Indexacion.Documento;
 import Indexacion.Palabra;
 import Indexacion.StringSimbolizador;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +24,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,12 +35,13 @@ import java.util.logging.Logger;
 public class Buscador {
     private HashMap<String,Palabra> vocabulario;
     private HashMap<Integer,Documento> documentos;
-    
+    private String origen;
     private int R=30;
 
     public Buscador() {
         vocabulario=new HashMap<String,Palabra>();
         documentos=new HashMap<Integer,Documento>();
+        origen="vocabulario";
         cargarVocabulario();
         listarArchivos();
         //probando
@@ -91,13 +96,14 @@ public class Buscador {
     private void cargarVocabulario(){
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:vocabulario");
+            System.out.println(new File(".").getAbsolutePath());
+            conn = DriverManager.getConnection("jdbc:sqlite:"+origen);
             Statement st = conn.createStatement();
             String consulta="SELECT * FROM palabras";
             ResultSet rs=st.executeQuery(consulta);
             
             while (rs.next()) {
-                vocabulario.put(rs.getString(2), new Palabra(rs.getString(2),
+               vocabulario.put(rs.getString(2), new Palabra(rs.getString(2),
                         rs.getInt(1),rs.getInt(3),rs.getInt(4)));
             }
             rs.close();
@@ -111,7 +117,7 @@ public class Buscador {
     private void listarArchivos(){
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:vocabulario");
+            conn = DriverManager.getConnection("jdbc:sqlite:"+origen);
             Statement st = conn.createStatement();
             String consulta="SELECT ROWID,origen FROM Documentos";
             ResultSet rs=st.executeQuery(consulta);
@@ -133,7 +139,7 @@ public class Buscador {
         
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:vocabulario");
+            conn = DriverManager.getConnection("jdbc:sqlite:"+origen);
             Statement st = conn.createStatement();
             String consulta="SELECT idDocumento,contador FROM palabrasXDocumento"
                     + " WHERE idPalabra=" + palabra.getIdPalabra() + " ORDER BY"
@@ -151,6 +157,32 @@ public class Buscador {
             Logger.getLogger(Buscador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaPosteo;
+    }
+
+    private String cargarOrigen() {
+        Properties propiedades=new Properties();
+        InputStream entrada=null;
+     
+   
+            try {
+                entrada = new FileInputStream("Configuracion.properties");
+
+                propiedades.load(entrada);
+                
+                return propiedades.getProperty("BD");
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                if (entrada != null) {
+                    try {
+                        entrada.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        return null;   
     }
     
 }
