@@ -3,21 +3,12 @@
 <!DOCTYPE html>
 <html>
     <head>  
-        <title>Resltados</title>
+        <title>Resultados</title>
         <style>
             body{
-                background-color: cornsilk;
-            }
-            #volver{
-                position: relative; 
-                top: 30px;
-            }
-            #integrantes{
-                position: absolute; 
-                right: 30px; 
-                bottom: 10px; 
-               
-            }
+                background-color: #9acfea;
+            }         
+           
             p{
                  font-family: sans-serif;
             }
@@ -27,19 +18,16 @@
         </style>
     </head>
     <body>
-        <img>
-        <form action="Conexion" method="POST" onsubmit="showSpinner()">
-                    <input class="w3-input" type="text" placeholder="Ingrese aquí su búsqueda..." name="campoBusqueda" autofocus required>
-                    <!--<input class="w3-button w3-hover-blue-grey w3-block w3-xlarge" type="submit" value="Buscar">-->
-        </form>
+               
         
         <% String t[] = (String [])request.getAttribute("titulos");%>
         <% String o[] = (String [])request.getAttribute("origenes");%>
         <ol>
         <%
         for(int i=0;i<t.length;i++){
-            String nombre=t[i];
-            out.write("<li>"+nombre+" <a href =\"./DocumentosTP1/"+nombre+" \" download = \" "+nombre+ " \" > Descargar </a></li><br>");            
+            String nombre = t[i];
+            String origen = o[i];              
+            out.write("<li>"+nombre+" <a href =\"origen\" download = \" "+nombre+ " \" > Descargar </a></li><br>"); 
         }    
         %>
         </ol>
