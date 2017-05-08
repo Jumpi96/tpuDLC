@@ -7,10 +7,13 @@ package Servlet;
 
 import Buscador.Buscador;
 import Indexacion.AparicionPalabra;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -107,6 +110,30 @@ public class Conexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);       
+<<<<<<< HEAD
+        
+
+        String busqueda = request.getParameter("campoBusqueda");
+        List<AparicionPalabra> respuestaBuscador;
+        String origen=cargarOrigen();
+        
+        b = new Buscador();
+        respuestaBuscador=b.buscar(busqueda);
+        
+        String[] titulos = new String[respuestaBuscador.size()];
+        String[] origenes = new String[respuestaBuscador.size()];
+        
+        for (int i = 0; i < respuestaBuscador.size(); i++) {
+            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
+        }
+        
+        request.setAttribute("titulos", titulos);
+        request.setAttribute("origenes", origenes);
+        request.setAttribute("consulta",busqueda);
+        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+=======
 //        
 //
 //        String busqueda = request.getParameter("campoBusqueda");
@@ -128,7 +155,33 @@ public class Conexion extends HttpServlet {
 //        request.setAttribute("origenes", origenes);
 //        request.setAttribute("consulta",busqueda);
 //        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+>>>>>>> 64158e2c876cb4295d450463f2d585a34204999a
 
+    }
+    
+    private String cargarOrigen() {
+        Properties propiedades=new Properties();
+        InputStream entrada=null;
+        
+            try {
+                entrada = new FileInputStream("Configuracion.properties");
+
+                propiedades.load(entrada);
+                
+                return propiedades.getProperty("archivos");
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } finally {
+                if (entrada != null) {
+                    try {
+                        entrada.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        return null;
     }
 
     /**
