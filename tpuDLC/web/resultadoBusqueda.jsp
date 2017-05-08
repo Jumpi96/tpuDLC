@@ -43,7 +43,10 @@
         }    
         %>
         </ol>
-        <a id="volver" href="index.html">Volver</a><br>
-        <p id="integrantes">Created by Gil, Lorenzo ©</p>
+        <a id="volver" href="index.html">Volver</a>
+        <br>
+        <footer>
+        <p class="text-center" id="integrantes"> Antonellini, Gil, Lorenzo ©</p>
+        </footer>
     </body>
 </html>
