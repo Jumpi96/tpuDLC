@@ -44,10 +44,12 @@ public class Buscador {
         origen="vocabulario";
         cargarVocabulario();
         listarArchivos();
-        //probando
-        buscar("hello intelligence superb");
     }
-    
+    /*
+	buscar() - Método que tokeniza la búsqueda que llega por parámetros,
+	busca las listas de posteo de cada término y devuelve los archivos (hasta
+	30) que	más veces se repiten en una List<Documento>. 
+	*/
     public List buscar(String busqueda){
         listarArchivos();
         

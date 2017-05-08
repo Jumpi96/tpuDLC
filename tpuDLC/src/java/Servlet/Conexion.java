@@ -98,16 +98,19 @@ public class Conexion extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);       
 
+		//Toma la búsqueda, carga la raíz dónde están los archivos.
         String busqueda = request.getParameter("campoBusqueda");
         List<AparicionPalabra> respuestaBuscador;
         String origen=cargarOrigen();
         
+		//Llama a clase Buscador y obtiene los resultados.
         b = new Buscador();
         respuestaBuscador=b.buscar(busqueda);
         
         String[] titulos = new String[respuestaBuscador.size()];
         String[] origenes = new String[respuestaBuscador.size()];
         
+		//Carga dos array de String para el formulario resultadoBusqueda.jsp
         for (int i = 0; i < respuestaBuscador.size(); i++) {
             titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
             origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
