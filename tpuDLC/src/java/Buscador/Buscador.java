@@ -125,7 +125,8 @@ public class Buscador {
             ResultSet rs=st.executeQuery(consulta);
             
             while (rs.next()) {
-                documentos.put(rs.getInt(1), new Documento(new File(rs.getString(2)),
+                documentos.put(rs.getInt(1), new Documento(
+                        new File("DocumentosTP1/"+rs.getString(2)),
                         rs.getInt(1)));
             }
             rs.close();
