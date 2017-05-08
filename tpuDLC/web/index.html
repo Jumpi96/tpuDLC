@@ -11,27 +11,33 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css" >
 
- <style>
-            body
+ <style>            
+            body 
             {
-                background-color:#6fdeab;                
-                background-position: 50% 300%;
-                background-repeat: no-repeat;
-            }
+  
+            background-image: url(fotolibro.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #464646;}
+            
+
             .titulo, .botonArmarVocabulario, .busqueda
             {
                 
-                font-family: Fjalla One;
+                font-family: serif;
                 width: 50%;
                 margin: auto;
                 text-align: center;                                
             }
             .titulo
             {
-                font-size: 40px; 
-                line-height: 10%;
-                color: #6fdeab;
-                text-shadow: 2px 2px green, -2px 2px green, 2px -2px green, -2px -2px green
+                font-size: xx-large; 
+                line-height: 20%;
+                color: #ffffff;
+                text-align: center;  
+                
             }
             .boton
             {
@@ -45,21 +51,23 @@
                 text-decoration: none;
                 display: inline-block;
                 font-size: 16px;
+                text-align: center;  
             }
             
         </style>
   </head>
-  <body>
+  <body>   
     <div class="container">
-    <div class="jumbotron">
+    <div class="titulo">
      <h1>Buscador</h1>     
     </div>
     </div>
         
         <div class="busqueda">
             <form action="Conexion" method="get">
-                <h2>Su búsqueda: <input type="text" name="campoBusqueda" id="campoBusqueda"></h2>
-                <input type="submit" name="btn_buscar" value="Buscar" class="boton">
+                <h2><input type="text" name="campoBusqueda" id="campoBusqueda"></h2>
+                <input type="submit" name="btn_buscar" value="Buscar" class="boton">                
+                
             </form>
         </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

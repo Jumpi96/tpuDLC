@@ -2,93 +2,48 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Resultado</title>
-        <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet"> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function()
-            {
-                $("#pagina1-2").click(function()
-                {
-                    $(".listado").hide();
-                    $("#pagina2").show();
-                });
-                $("#pagina2-1").click(function()
-                {
-                    $(".listado").hide();
-                    $("#pagina1").show();
-                });
-                $("#pagina2-3").click(function()
-                {
-                    $(".listado").hide();
-                    $("#pagina3").show();
-                });
-                $("#pagina3-2").click(function()
-                {
-                    $(".listado").hide();
-                    $("#pagina2").show();
-                });
-            });
-        </script>
+    <head>  
+        <title>Resltados</title>
         <style>
-            body
-            {
-                background-color:#d7fac4;
+            body{
+                background-color: cornsilk;
             }
-            .titulo, .listado, .subtitulo, .volver
-            {
-                font-family: Fjalla One;
-                width: 50%;
-                margin: auto;
-                text-align: center;                                
+            #volver{
+                position: relative; 
+                top: 30px;
             }
-            .listado
-            {
-                display: none;
+            #integrantes{
+                position: absolute; 
+                right: 30px; 
+                bottom: 10px; 
+               
             }
-            .titulo
-            {
-                font-size: 30px; 
-                line-height: 100%;
-                color: #6fdeab;
-                text-shadow: 1.5px 1.5px green, -1.5px 1.5px green, 1.5px -1.5px green, -1.5px -1.5px green;
+            p{
+                 font-family: sans-serif;
             }
-            .subtitulo
-            {
-                font-size: 20px; 
-                line-height: 20%;
+            a{
+                font-family: sans-serif; 
             }
-            .boton
-            {
-                border: 2px solid green;
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-                background-color: #4CAF50;
-                color: white;
-                padding: 15px 32px;
-                font-family: Fjalla One;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-            }
-        </style>           
-        
+        </style>
     </head>
     <body>
+        <img>
+        <form action="Conexion" method="POST" onsubmit="showSpinner()">
+                    <input class="w3-input" type="text" placeholder="Ingrese aquí su búsqueda..." name="campoBusqueda" autofocus required>
+                    <!--<input class="w3-button w3-hover-blue-grey w3-block w3-xlarge" type="submit" value="Buscar">-->
+        </form>
         
-            <h1>Documentos relacionados</h1>
-        </div>      
-            <br> 
-            <div>           
-            <ol>                
-                <c:forEach items="${origenes}" var="d" begin="0" end="19" varStatus="i">                     
-                    <li value="${i.index + 1}">Documento: <c:out value="${d.getTitulo()}"></c:out></li>
-                    <br>                    
-                </c:forEach>
-            </ol>            
-            </div>
-        
+        <% String t[] = (String [])request.getAttribute("titulos");%>
+        <% String o[] = (String [])request.getAttribute("origenes");%>
+        <ol>
+        <%
+        for(int i=0;i<t.length;i++){
+            String nombre=t[i];
+            out.write("<li>"+nombre+" <a href =\"./DocumentosTP1/"+nombre+" \" download = \" "+nombre+ " \" > Descargar </a></li><br>");            
+        }    
+        %>
+        </ol>
+        <a id="volver" href="index.html">Volver</a><br>
+        <p id="integrantes">Created by Gil, Lorenzo ©</p>
     </body>
 </html>

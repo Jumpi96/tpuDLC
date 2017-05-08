@@ -42,32 +42,60 @@ public class Conexion extends HttpServlet {
     Buscador b;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        response.setContentType("text/html;charset=UTF-8");        
-
+        response.setContentType("text/html;charset=UTF-8"); 
+        
+		//Toma la búsqueda, carga la raíz dónde están los archivos.
         String busqueda = request.getParameter("campoBusqueda");
-        List<Documento> respuestaBuscador;
+        List<AparicionPalabra> respuestaBuscador;
         String origen=cargarOrigen();
         
-        b = new Buscador();
+		//Llama a clase Buscador y obtiene los resultados.
+        b = new Buscador();       
+ 
         respuestaBuscador=b.buscar(busqueda);
         
         String[] titulos = new String[respuestaBuscador.size()];
         String[] origenes = new String[respuestaBuscador.size()];
         
+        System.out.println("Longitud de t" + titulos.length);
+        
+		//Carga dos array de String para el formulario resultadoBusqueda.jsp
         for (int i = 0; i < respuestaBuscador.size(); i++) {
-            titulos[i]=respuestaBuscador.get(i).getTitulo();
-            origenes[i]=origen+respuestaBuscador.get(i).getArchivo().getAbsolutePath();
+            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
+                    .getArchivo().getPath();
         }
         
         request.setAttribute("titulos", titulos);
         request.setAttribute("origenes", origenes);
         request.setAttribute("consulta",busqueda);
         request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+//        try {
+//            Class.forName("org.sqlite.JDBC");
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        response.setContentType("text/html;charset=UTF-8");        
+//
+//        String busqueda = request.getParameter("campoBusqueda");
+//        List<Documento> respuestaBuscador;
+//        String origen=cargarOrigen();
+//        
+//        b = new Buscador();
+//        respuestaBuscador=b.buscar(busqueda);
+//        
+//        String[] titulos = new String[respuestaBuscador.size()];
+//        String[] origenes = new String[respuestaBuscador.size()];
+//        
+//        for (int i = 0; i < respuestaBuscador.size(); i++) {
+//            titulos[i]=respuestaBuscador.get(i).getTitulo();
+//            origenes[i]=origen+respuestaBuscador.get(i).getArchivo().getAbsolutePath();
+//        }
+//        
+//        request.setAttribute("titulos", titulos);
+//        request.setAttribute("origenes", origenes);
+//        request.setAttribute("consulta",busqueda);
+//        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,30 +125,30 @@ public class Conexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);       
-
-		//Toma la búsqueda, carga la raíz dónde están los archivos.
-        String busqueda = request.getParameter("campoBusqueda");
-        List<AparicionPalabra> respuestaBuscador;
-        String origen=cargarOrigen();
-        
-		//Llama a clase Buscador y obtiene los resultados.
-        b = new Buscador();
-        respuestaBuscador=b.buscar(busqueda);
-        
-        String[] titulos = new String[respuestaBuscador.size()];
-        String[] origenes = new String[respuestaBuscador.size()];
-        
-		//Carga dos array de String para el formulario resultadoBusqueda.jsp
-        for (int i = 0; i < respuestaBuscador.size(); i++) {
-            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
-                    .getArchivo().getPath();
-        }
-        
-        request.setAttribute("titulos", titulos);
-        request.setAttribute("origenes", origenes);
-        request.setAttribute("consulta",busqueda);
-        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
+//
+//		//Toma la búsqueda, carga la raíz dónde están los archivos.
+//        String busqueda = request.getParameter("campoBusqueda");
+//        List<AparicionPalabra> respuestaBuscador;
+//        String origen=cargarOrigen();
+//        
+//		//Llama a clase Buscador y obtiene los resultados.
+//        b = new Buscador();
+//        respuestaBuscador=b.buscar(busqueda);
+//        
+//        String[] titulos = new String[respuestaBuscador.size()];
+//        String[] origenes = new String[respuestaBuscador.size()];
+//        
+//		//Carga dos array de String para el formulario resultadoBusqueda.jsp
+//        for (int i = 0; i < respuestaBuscador.size(); i++) {
+//            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
+//            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
+//                    .getArchivo().getPath();
+//        }
+//        
+//        request.setAttribute("titulos", titulos);
+//        request.setAttribute("origenes", origenes);
+//        request.setAttribute("consulta",busqueda);
+//        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
     }
     
     private String cargarOrigen() {
