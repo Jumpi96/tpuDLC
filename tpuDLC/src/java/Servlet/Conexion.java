@@ -44,6 +44,7 @@ public class Conexion extends HttpServlet {
 
         String busqueda = request.getParameter("campoBusqueda");
         List<AparicionPalabra> respuestaBuscador;
+        String origen=cargarOrigen();
         
         b = new Buscador();
         respuestaBuscador=b.buscar(busqueda);
@@ -53,34 +54,14 @@ public class Conexion extends HttpServlet {
         
         for (int i = 0; i < respuestaBuscador.size(); i++) {
             titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
-            origenes[i]=respuestaBuscador.get(i).getDocumento()
+            origenes[i]=origen+respuestaBuscador.get(i).getDocumento()
                     .getArchivo().getPath();
         }
-        
         
         request.setAttribute("titulos", titulos);
         request.setAttribute("origenes", origenes);
         request.setAttribute("consulta",busqueda);
         request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
-
-//        String busqueda = request.getParameter("campoBusqueda");
-//        List<AparicionPalabra> respuestaBuscador;
-//        
-//        b = new Buscador();
-//        respuestaBuscador=b.buscar(busqueda);
-//        
-//        String[][] respuesta = new String[respuestaBuscador.size()][2];
-//        
-//        for (int i = 0; i < respuestaBuscador.size(); i++) {
-//            respuesta[i][0]=respuestaBuscador.get(i).getDocumento().getTitulo();
-//            respuesta[i][1]=respuestaBuscador.get(i).getDocumento()
-//                    .getArchivo().getPath();
-//        }
-//        
-//        request.setAttribute("resultados", respuesta);
-//        request.setAttribute("consulta",busqueda);
-//        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
-
  }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,8 +91,6 @@ public class Conexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);       
-<<<<<<< HEAD
-        
 
         String busqueda = request.getParameter("campoBusqueda");
         List<AparicionPalabra> respuestaBuscador;
@@ -133,30 +112,6 @@ public class Conexion extends HttpServlet {
         request.setAttribute("origenes", origenes);
         request.setAttribute("consulta",busqueda);
         request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
-=======
-//        
-//
-//        String busqueda = request.getParameter("campoBusqueda");
-//        List<AparicionPalabra> respuestaBuscador;
-//        
-//        b = new Buscador();
-//        respuestaBuscador=b.buscar(busqueda);
-//        
-//        String[] titulos = new String[respuestaBuscador.size()];
-//        String[] origenes = new String[respuestaBuscador.size()];
-//        
-//        for (int i = 0; i < respuestaBuscador.size(); i++) {
-//            titulos[i]=respuestaBuscador.get(i).getDocumento().getTitulo();
-//            origenes[i]=respuestaBuscador.get(i).getDocumento()
-//                    .getArchivo().getPath();
-//        }
-//        
-//        request.setAttribute("titulos", titulos);
-//        request.setAttribute("origenes", origenes);
-//        request.setAttribute("consulta",busqueda);
-//        request.getRequestDispatcher("resultadoBusqueda.jsp").forward(request, response);
->>>>>>> 64158e2c876cb4295d450463f2d585a34204999a
-
     }
     
     private String cargarOrigen() {
