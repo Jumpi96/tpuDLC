@@ -46,9 +46,9 @@ public class Documento implements Comparable<Documento> {
     }
     
     public String getTitulo() throws FileNotFoundException, IOException{
-        
+        /*
         FileInputStream fis=new FileInputStream(archivo);
-        /*Scanner scanner=new Scanner(fis);
+        Scanner scanner=new Scanner(fis);
         String linea=scanner.nextLine();
         return linea;
         */
