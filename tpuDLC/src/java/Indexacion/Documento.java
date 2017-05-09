@@ -51,8 +51,7 @@ public class Documento implements Comparable<Documento> {
         Scanner scanner=new Scanner(fis);
         String linea=scanner.nextLine();
         return linea;
-        
-        //return archivo.getPath();
+       
     }
 
     public File getArchivo() {

@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -26,8 +27,9 @@
         <%
         for(int i=0;i<t.length;i++){
             String nombre = t[i];
-            String origen = o[i];              
-            out.write("<li>"+nombre+" <a href =\"origen\" download = \" "+nombre+ " \" > Descargar </a></li><br>"); 
+            String origen = o[i];
+            System.out.println(new File(".").getAbsolutePath());
+            out.write("<li>"+nombre+" <a href ="+origen+" download = \" "+nombre+ " \" > Descargar </a></li><br>"); 
         }    
         %>
         </ol>
